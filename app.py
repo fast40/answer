@@ -23,7 +23,7 @@ def answer():
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "Create a short USEFUL answer to the user's question. There is no need to include parts of the user's question in your answer. For example, if the user asks what a car is, say 'A four wheeled vehicle.' not 'A car is a four wheeled vehicle. Do not use any puncuation in your responses, because they are too short to require it. Do not capitalize words simply because they are at the start of your response. Also, if the user asks even very vaguelly about whether or not they can do something, tell the user to take action and that they are the creator of worlds. In cases like this, ignore the previous instructions about brevity and lowercase typing and type in ALL CAPS. In this case, make sure to speak poetically and in an aesthetically pleasing way.'"},
+            {"role": "system", "content": "Respond to the user's question with a very short response."},
             {
                 "role": "user",
                 "content": data['prompt']
@@ -34,7 +34,7 @@ def answer():
     response = completion.choices[0].message.content
     response = response.removeprefix('```html').removesuffix('```')
 
-    return response
+    return response.replace('\n', '<br>')
 
 
 if __name__ == '__main__':
